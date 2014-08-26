@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+
+</head>
+<body>
+
+<canvas id="myCanvas"></canvas>
+
+<script>
+
+		var c = null;
+		var context = null;
+		var img = null;
+		var frameRate = 1000/24;
+		var frame = 0;
+
+		var assets = ['dhimg/phone1.png',
+					  'dhimg/phone2.png',
+					  //'dhimg/phone3.png',
+					  'dhimg/phone4.png',
+					  'dhimg/phone5.png',
+					  //'dhimg/phone6.png',
+					  'dhimg/phone7.png',
+					  'dhimg/phone8.png',
+					  //'dhimg/phone9.png',
+					  'dhimg/phone10.png',
+					  'dhimg/phone11.png'
+		              ];
+
+		var frames = [];
+
+		var onImageLoad = function(){
+			//context.drawImage(img, 10, 10);
+			console.log("image");
+		};
+
+
+		var setup = function(){
+			c = document.getElementById("myCanvas");
+			context = c.getContext("2d");
+			c.width = 1500;
+			c.height =1500;
+
+			for (var i = 0; i < assets.length; i++){
+				frames.push(new Image());
+				frames[i].src = assets[i];
+				frames[i].onload = onImageLoad;
+			};
+		
+			setInterval(animate, frameRate);			
+			
+		}
+        
+        var animate = function(){
+        	context.drawImage(frames[frame], 1, 1);
+        	//context.fillStyle = "#ffffff"
+        	//context.fillRect(1, 1, 1500, 1500);
+
+        	//context.clearRect(0,0, 1500, 1500);
+        	frame = (frame + 1) % frames.length;
+        };
+		setup();
+</script>
+
+
+
+</body>
+</html>
